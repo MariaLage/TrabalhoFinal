@@ -1,6 +1,7 @@
 package com.example.marialage.trabalhofinal;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class Create extends Activity {
         setContentView(R.layout.activity_create);
 
         a = new BDAdapter(this).open();
+        final Context context = this;
         aDisci = (EditText) findViewById(R.id.disciet);
         aDesc = (EditText) findViewById(R.id.descriet);
         aData = (EditText) findViewById(R.id.data);
@@ -49,7 +51,10 @@ public class Create extends Activity {
         botaoIns.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 a.insertTestTrab(oTipo.getSelectedItemPosition(), aDisci.getText().toString(), aDesc.getText().toString(), aData.getText().toString());
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 }

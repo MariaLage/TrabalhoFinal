@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void executarOutraActivity(Class<?> subActividade, int oValor) {
         Intent x = new Intent(this, subActividade);
-        x.putExtra("_id", oValor);
+        x.putExtra("tipo", oValor);
         startActivity(x);
     }
 
@@ -73,17 +73,15 @@ public class MainActivity extends AppCompatActivity {
         botaoTestes.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Testes.class);
-                startActivity(intent);
+                executarOutraActivity(Testes.class, 0);
             }
         });
 
         botaoTrab.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(context, Trabalhos.class);
-                    startActivity(intent);
-                }
+                executarOutraActivity(Testes.class, 1);
+            }
         });
     }
 }

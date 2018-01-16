@@ -22,7 +22,9 @@
         <activity android:name=".Create" />
         <activity android:name=".Testes" />
         <activity android:name=".Trabalhos" />
-        <activity android:name=".DetalhesTestes"></activity>
+        <activity android:name=".Detalhes" />
+        <activity android:name=".EditTeste" />
+        <activity android:name=".EditTrabalho"></activity>
     </application>
 
 </manifest>

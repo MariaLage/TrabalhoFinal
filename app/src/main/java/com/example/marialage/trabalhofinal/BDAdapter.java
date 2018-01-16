@@ -39,33 +39,16 @@ public class BDAdapter extends AppCompatActivity {
         return database.query("agenda", colunas, null, null, null, null, "tipo");
     }
 
-    public int obterTodosCampos(List<Integer> osIds, List<Integer> osTipos, List<String> asDisci,List<String> asDescri, List<String> asDatas) {
-        String[] colunas = new String[23];
-        colunas[0] = "_id";
-        colunas[1] = "tipo";
-        colunas [2] = "disciplina";
-        colunas[3] = "descricao";
-        colunas [4] = "data";
-        Cursor c = database.query("agenda", colunas, null, null, null, null, null);
-        if (c.moveToFirst()) {
-            do {
-                osIds.add(c.getInt(0));
-                osTipos.add(c.getInt(1));
-                asDisci.add(c.getString(2));
-                asDescri.add(c.getString(3));
-                asDatas.add(c.getString(4));
-            } while (c.moveToNext());
-        }
-        c.close();
-        return osIds.size();
+    private Cursor obterRegistosTrabalhosTestes(Integer tipo) {
+        String[] colunas = new String[4];
+        colunas[0] = "tipo";
+        colunas [1] = "disciplina";
+        colunas[2] = "descricao";
+        colunas[3] = "data";
+        String[] args = { tipo.toString()};
+        return database.query("agenda", colunas, "tipo = ?", args, null, null, "tipo");
     }
-    public boolean existe(String umNome) {
-        Cursor cursor = database.rawQuery(
-                "select nome from agenda where tipo=?", new String[] { umNome });
-        boolean b = cursor.getCount() >= 1;
-        cursor.close();
-        return b;
-    }
+
     public long insertTestTrab(Integer oTipo, String aDisci, String aDesc, String aData) {
         ContentValues values = new ContentValues() ;
         values.put("tipo", oTipo);
@@ -74,16 +57,12 @@ public class BDAdapter extends AppCompatActivity {
         values.put("data", aData);
         return database.insert("agenda", null, values);
     }
-    public int deleteNome(String oNome) {
+    public int deleteTesteTrabalho(String oNome) {
         String whereClause = "nome = ?";
         String[] whereArgs = new String[1];
         whereArgs[0] = oNome;
         return database.delete("contactos", whereClause, whereArgs);
     }
-    public int deleteTodosNomes() {
-        return database.delete("contactos", null, null);
-    }
-
 
     public int updateNome(Integer oId, String oNome, String aMorada, Integer oTelefone) {
         String whereClause = "_id = ?";
@@ -96,24 +75,12 @@ public class BDAdapter extends AppCompatActivity {
         return database.update("contactos", values, whereClause, whereArgs);
     }
 
-    public List<String> obterTodosTrabalhos() {
-        ArrayList<String> trabalhos = new ArrayList<String>();
-        Cursor cursor = obterRegistos();
-        if (cursor.moveToFirst()) {
-            do {
-                trabalhos.add(cursor.getString(1) + "->" + cursor.getString(3));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return trabalhos;
-    }
-
-    public List<String> obterTodosTestes() {
+    public List<String> obterTodosTestesTrabalhos(Integer tipo) {
         ArrayList<String> testes = new ArrayList<String>();
-        Cursor cursor = obterRegistos();
+        Cursor cursor = obterRegistosTrabalhosTestes(tipo);
         if (cursor.moveToFirst()) {
             do {
-                testes.add(cursor.getString(1) + "->" + cursor.getString(3));
+                testes.add(cursor.getString(1) + " -> " + cursor.getString(3));
             } while (cursor.moveToNext());
         }
         cursor.close();

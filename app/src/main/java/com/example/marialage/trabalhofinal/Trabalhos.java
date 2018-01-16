@@ -17,6 +17,7 @@ public class Trabalhos extends Activity {
     protected List<String> osTipos;
     protected BDAdapter a;
     protected MainActivity mA;
+    public int tipoLembrete;
 
     private void executarOutraActivity(Class<?> subActividade, String oValor) {
         Intent x = new Intent(this, subActividade);
@@ -47,7 +48,9 @@ public class Trabalhos extends Activity {
         setContentView(R.layout.activity_trabalhos);
         osTipos = new ArrayList<String>();
         a = new BDAdapter(this).open();
-        osTipos = a.obterTodosTrabalhos();
+        Intent oIntent = getIntent();
+        tipoLembrete = oIntent.getIntExtra("tipo", 0);
+        osTipos = a.obterTodosTestesTrabalhos(tipoLembrete);
 
         listView = (ListView) findViewById(R.id.trablv);
 

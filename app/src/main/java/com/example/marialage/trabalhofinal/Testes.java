@@ -1,22 +1,23 @@
 package com.example.marialage.trabalhofinal;
 
 import android.app.Activity;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.ListView;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Testes extends Activity {
     ListView listView ;
     protected List<String> osTipos;
     protected BDAdapter a;
     protected MainActivity mA;
+    public int tipoLembrete;
 
     private void executarOutraActivity(Class<?> subActividade, String oValor) {
         Intent x = new Intent(this, subActividade);
@@ -47,7 +48,9 @@ public class Testes extends Activity {
         setContentView(R.layout.activity_testes);
         osTipos = new ArrayList<String>();
         a = new BDAdapter(this).open();
-        osTipos = a.obterTodosTestes();
+        Intent oIntent = getIntent();
+        tipoLembrete = oIntent.getIntExtra("tipo", 0);
+        osTipos = a.obterTodosTestesTrabalhos(tipoLembrete);
 
         listView = (ListView) findViewById(R.id.testelv);
 
@@ -67,7 +70,7 @@ public class Testes extends Activity {
 
                 String  itemValue = (String) listView.getItemAtPosition(position);
 
-                executarOutraActivity(DetalhesTestes.class, itemValue);
+                executarOutraActivity(Detalhes.class, itemValue);
 
             }
 
