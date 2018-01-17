@@ -3,16 +3,19 @@ package com.example.marialage.trabalhofinal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ public class Create extends Activity {
     protected Button botaoIns;
     protected Spinner oTipo;
     protected BDAdapter a;
+    private int ano, mes, dia;
 
 
     @Override
@@ -57,4 +61,5 @@ public class Create extends Activity {
         });
 
     }
+
 }

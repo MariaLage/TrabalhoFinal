@@ -70,7 +70,7 @@ public class Trabalhos extends Activity {
 
                 String  itemValue = (String) listView.getItemAtPosition(position);
 
-                executarOutraActivity(Update.class, itemValue);
+                executarOutraActivity(Detalhes.class, itemValue);
 
             }
 
