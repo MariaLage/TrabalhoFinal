@@ -28,7 +28,6 @@ public class Detalhes extends Activity {
     Intent oIntent;
     protected Button btEdit, btDelete, btGoogle;
     public int tipoLembrete, id_lembrete;
-    protected GoogleSearch g;
 
     private void executarOutraActivity(Class<?> subActividade, int oValor) {
         Intent x = new Intent(this, subActividade);
