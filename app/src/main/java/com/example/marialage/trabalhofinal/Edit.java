@@ -117,7 +117,6 @@ public class Edit extends Activity {
     }
 
     public void DatePicker2(){
-        // Get Current Date
         final Calendar c = Calendar.getInstance();
         ano = c.get(Calendar.YEAR);
         mes = c.get(Calendar.MONTH);

@@ -1,0 +1,1 @@
+﻿# Esta aplicação tem como objetivo criar, listar, editar e apagar eventos sobre testes e trabalhos. Permite, através de uma API do Google Custom Search, pesquisar a disciplina do teste/trabalho em questão.

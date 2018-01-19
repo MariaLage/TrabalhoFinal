@@ -3,7 +3,6 @@ package com.example.marialage.trabalhofinal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +18,8 @@ import android.app.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
+
 
 
 public class Create extends Activity {
@@ -36,12 +37,30 @@ public class Create extends Activity {
         setContentView(R.layout.activity_create);
 
         a = new BDAdapter(this).open();
+
+
         final Context context = this;
         aDisci = (EditText) findViewById(R.id.disciet);
         aDesc = (EditText) findViewById(R.id.descriet);
         aData = (EditText) findViewById(R.id.data);
         oTipo = (Spinner) findViewById(R.id.tipo);
         botaoIns = (Button) findViewById(R.id.createbt);
+
+        aData.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DatePicker();
+            }
+        });
+
+        aData.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    DatePicker();
+                }
+            }
+        });
+
 
         List<String> umaLista = new ArrayList<String>();
         umaLista.add("Teste");
@@ -60,6 +79,48 @@ public class Create extends Activity {
             }
         });
 
+    }
+
+    public void DatePicker(){
+        final java.util.Calendar c = java.util.Calendar.getInstance();
+        ano = c.get(java.util.Calendar.YEAR);
+        mes = c.get(java.util.Calendar.MONTH);
+        dia = c.get(java.util.Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        aData.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, ano, mes, dia);
+        datePickerDialog.show();
+    }
+
+    public void DatePicker2(){
+        final java.util.Calendar c = java.util.Calendar.getInstance();
+        ano = c.get(java.util.Calendar.YEAR);
+        mes = c.get(java.util.Calendar.MONTH);
+        dia = c.get(java.util.Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        aData.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, ano, mes, dia);
+        datePickerDialog.show();
     }
 
 }
